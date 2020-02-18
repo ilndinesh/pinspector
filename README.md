@@ -1,2 +1,2 @@
-# py-live-inspector
+# pinspector
 Python live objects inspector
