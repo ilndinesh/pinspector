@@ -42,7 +42,7 @@ class PinServer():
         self.host = host
         self.title = title
         self.prefix = 'pin'
-        self.directory = os.path.dirname(inspect.currentframe()) + '/static'
+        self.directory = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + '/static'
         self.started = False
         all_targets = {'service': self}
         if isinstance(targets, dict):
