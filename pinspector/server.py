@@ -60,10 +60,16 @@ class PinServer():
     def __call__(self):
         with ThreadingHTTPServer((self.host, self.port), PinHandler) as httpd:
             httpd.pin_server = self
+            self.httpd = httpd
             httpd.serve_forever()
 
     def start(self):
         if not self.started:
             Thread(target=self).start()
             self.started = True
+
+    def stop(self):
+        if self.started:
+            self.httpd.shutdown()
+            self.started = False
 
