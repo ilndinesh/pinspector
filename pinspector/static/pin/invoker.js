@@ -378,10 +378,10 @@ function getObject(path, meta, callback) {
 								+ (type.indexOf('{"error":') == 0 ? '!Error' : type.substring(type.lastIndexOf(".") + 1)),
 						type : type.indexOf('{"error":') == 0 ? '!Error' : type,
 						leaf : isLeaf,
-						uri : context.objPath + "..~" + context.name,
+						uri : context.objPath + ".." + context.name,
 						qtip : context.objPath.substring(context.objPath
 								.indexOf("..") + 2)
-								+ "..~" + context.name
+								+ ".." + context.name
 					});
 			});
 		}
@@ -413,10 +413,10 @@ function getObject(path, meta, callback) {
 								+ (type.indexOf('{"error":') == 0 ? '!Error' : type.substring(type.lastIndexOf(".") + 1)),
 						type : type.indexOf('{"error":') == 0 ? '!Error' : type,
 						leaf : isLeaf,
-						uri : context.objPath + "..~" + context.name,
+						uri : context.objPath + ".." + context.name,
 						qtip : context.objPath.substring(context.objPath
 								.indexOf("..") + 2)
-								+ "..~" + context.name
+								+ ".." + context.name
 					});
 				});
 			});
@@ -451,10 +451,10 @@ function getObject(path, meta, callback) {
 								+ (type.indexOf('{"error":') == 0 ? '!Error' : type.substring(type.lastIndexOf(".") + 1)),
 						type : type.indexOf('{"error":') == 0 ? '!Error' : type,
 						leaf : isLeaf,
-						uri : context.path + "..~" + context.name,
+						uri : context.path + ".." + context.name,
 						qtip : context.path.substring(context.path
 								.indexOf("..") + 2)
-								+ "..~" + context.name
+								+ ".." + context.name
 					});
 				});
 			});
@@ -612,7 +612,7 @@ function expandChildWithUri(node, uri) {
 	// uri = uri.substring(uri.indexOf('~~') + 1);
 	for (var i = 0; i < node.childNodes.length; i++) {
 		if (node.childNodes[i].raw.text.startsWith('_')
-				&& uri.indexOf('..~') > 0) {
+				&& uri.indexOf('..') > 0) {
 			node.childNodes[i].expand();
 			return expandChildWithUri(node.childNodes[i], uri);
 		}
