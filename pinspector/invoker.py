@@ -70,10 +70,10 @@ class URIInvoker():
         elif '..' in spec:
             spec_info = spec.split('..', 1)
             return self.invoke(self.invoke(target, spec_info[0], prev_target=prev_target), spec_info[1], prev_target=target)
-        elif spec.startswith('~') or spec.isnumeric():
-            return self.getval(target, spec[1:])
         else:
             if spec.startswith('$'):
+                spec = spec[1:]
+            elif spec.startswith('~'):
                 spec = spec[1:]
             if '~~' in spec:
                 spec_info = spec.split('~~', 1)
