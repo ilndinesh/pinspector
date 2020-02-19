@@ -10,11 +10,11 @@ class URIInvoker():
 
     def convert(self, val:str, ref):
         obj = val
-        if isinstance(ref, int):
-            obj = int(val)
-        elif isinstance(ref, bool):
+        if type(ref) is bool:
             obj = bool(val)
-        elif isinstance(ref, float):
+        elif type(ref) is int:
+            obj = int(val)
+        elif type(ref) is float:
             obj = float(val)
         return obj
 
@@ -29,10 +29,10 @@ class URIInvoker():
         return getattr(obj, key, None)
 
     def setval(self, obj, key:str, val):
-        if isinstance(obj, list) or hasattr(obj, '__iter__'):
-            obj[int(key)] = val
-        elif isinstance(obj, dict):
+        if isinstance(obj, dict):
             obj[key] = val
+        elif isinstance(obj, (list, tuple)):
+            obj[int(key)] = val
         else:
             return setattr(obj, key, val)
 
