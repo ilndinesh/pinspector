@@ -11,7 +11,7 @@ class URIInvoker():
     def convert(self, val:str, ref):
         obj = val
         if type(ref) is bool:
-            obj = bool(val)
+            obj = val.lower() in ['true', '1', 't', 'y', 'yes']
         elif type(ref) is int:
             obj = int(val)
         elif type(ref) is float:
