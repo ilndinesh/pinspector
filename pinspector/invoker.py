@@ -97,7 +97,7 @@ class URIInvoker():
                     return self.getval(target, spec_info[0])
             else:
                 attr = self.getval(target, spec)
-                if isinstance(attr, (dict, list)):
+                if isinstance(attr, (dict, list, int, str, float, bool)):
                     return attr
                 elif callable(attr):
                     try:
