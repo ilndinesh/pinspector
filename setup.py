@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pinspector",
-    version="0.8",
+    version="0.9",
     author="Dinesh Ilindra",
     author_email="dinesh.iln@gmail.com",
     description="Live object inspector",

@@ -1,5 +1,7 @@
 import inspect
 import logging
+import os
+import sys
 
 logger = logging.getLogger('pinspector')
 
@@ -81,13 +83,13 @@ class URIInvoker():
                 if callable(attr):
                     args = spec_info[1].split('::')
                     try:
-                        return attr(args)
+                        attr(*[eval(arg, {'os': os, 'sys': sys}, self.targets) for arg in args])
                     except:
                         try:
-                            return attr([int(arg) for arg in args])
+                            attr(*[int(arg) for arg in args])
                         except:
                             try:
-                                return attr([eval(arg) for arg in args])
+                                return attr(*args)
                             except:
                                 return attr
                 else:
