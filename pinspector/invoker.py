@@ -81,16 +81,15 @@ class URIInvoker():
                 if callable(attr):
                     args = spec_info[1].split('::')
                     try:
-                        val = attr(args)
-                        if callable(val):
-                            return val()
-                        else:
-                            return val
+                        return attr(args)
                     except:
                         try:
                             return attr([int(arg) for arg in args])
                         except:
-                            return attr
+                            try:
+                                return attr([eval(arg) for arg in args])
+                            except:
+                                return attr
                 else:
                     val = self.convert(spec_info[1], attr)
                     self.setval(target, spec_info[0], val)
@@ -101,11 +100,7 @@ class URIInvoker():
                     return attr
                 elif callable(attr):
                     try:
-                        val = attr()
-                        if callable(val):
-                            return val()
-                        else:
-                            return val
+                        return attr()
                     except:
                         return attr
                 else:
