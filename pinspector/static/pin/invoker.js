@@ -44,7 +44,8 @@ document.title = 'PIN - ' + 'Python Inspector' + ' - ' + host;
 var idCounter = 0;
 var leafTypes = [ "str", "long", "float",
 		"int", "complex", "bool",
-		"bytes", "bytearray" ];
+		"bytes", "bytearray",
+		"None", "NoneType" ];
 
 Ext.QuickTips.init();
 Ext.Ajax.useDefaultXhrHeader = false;
