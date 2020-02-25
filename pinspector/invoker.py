@@ -10,7 +10,7 @@ class URIInvoker():
     def __init__(self, targets):
         self.targets = targets
 
-    def convert(self, val:str, ref):
+    def convert(self, val:str, ref, target):
         obj = val
         if type(ref) is bool:
             obj = val.lower() in ['true', '1', 't', 'y', 'yes']
@@ -18,6 +18,11 @@ class URIInvoker():
             obj = int(val)
         elif type(ref) is float:
             obj = float(val)
+        else:
+            try:
+                obj = eval(val, globals(), {**self.targets, 'os': os, 'sys': sys, 'self': target})
+            except:
+                pass
         return obj
 
     def getval(self, obj, key:str):
@@ -83,17 +88,17 @@ class URIInvoker():
                 if callable(attr):
                     args = spec_info[1].split('::')
                     try:
-                        attr(*[eval(arg, {'os': os, 'sys': sys}, self.targets) for arg in args])
+                        return attr(*[eval(arg, globals(), {**self.targets, 'os': os, 'sys': sys, 'self': target}) for arg in args])
                     except:
                         try:
-                            attr(*[int(arg) for arg in args])
+                            return attr(*[int(arg) for arg in args])
                         except:
                             try:
                                 return attr(*args)
                             except:
                                 return attr
                 else:
-                    val = self.convert(spec_info[1], attr)
+                    val = self.convert(spec_info[1], attr, target)
                     self.setval(target, spec_info[0], val)
                     return self.getval(target, spec_info[0])
             else:
